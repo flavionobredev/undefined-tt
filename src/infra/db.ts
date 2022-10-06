@@ -1,6 +1,6 @@
-export class MongoDBMock<T> {
-  static getModel<T>(name: string): MongoDBMock<T> {
-    return new MongoDBMock<T>();
+export class MongoDB<T> {
+  static getModel<T>(name: string): MongoDB<T> {
+    return new MongoDB<T>();
   }
 
   private readonly db = new Set<T>();

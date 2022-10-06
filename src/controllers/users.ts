@@ -1,18 +1,19 @@
-import { MongoDBMock } from '@/infra/db';
+import { MongoDB } from '@/infra/db';
 import { User } from '@/models/users';
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 
-const UsersModel = MongoDBMock.getModel<User>('User');
+const UsersModel = MongoDB.getModel<User>('User');
 
 export const getAll = async (req: Request, res: Response) => {
-  const users = await UsersModel.find();
+  const UsersModelTest = MongoDB.getModel<User>('User');
+  const users = await UsersModelTest.find();
   const filtered = users.map((user) => {
     Reflect.deleteProperty(user, 'password');
     return user;
   });
 
-  res.status(200).json({ data: filtered });
+  return res.status(200).json({ data: filtered });
 };
 
 export const getOne = async (req: Request, res: Response) => {
