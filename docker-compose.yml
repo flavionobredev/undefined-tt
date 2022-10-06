@@ -1,19 +1,23 @@
-version: "3"
+version: "3.8"
 
 services:
-  app-repo:
+  undefined:
     build:
       context: ./
-    container_name: app-repo
-    tty: true
+      dockerfile: Dockerfile
+    container_name: undefined
     entrypoint: sh ./.docker/entrypoint.sh
     ports:
       - 3010:3010
     volumes:
-      - ./:/usr/app-repo/app
+      - ./:/usr/undefined/app
     networks:
-      - app-repo
+      - undefined
+    environment:
+      APP_VERSION: 1.0
+      APP_NAME: "Undefined: Begin tests in Monolith"
+      APP_PORT: 3010
 
 networks:
-  app-repo:
+  undefined:
     driver: bridge
